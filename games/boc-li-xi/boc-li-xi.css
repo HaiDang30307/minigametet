@@ -2,13 +2,13 @@
 
 .blx-container {
   width: 100%;
-  height: 100%;
+  min-height: 100%;
   display: flex;
   flex-direction: column;
   background: radial-gradient(circle at center, #7a0000, #4a0000);
   color: #fff;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  overflow: hidden;
+  overflow-y: auto;
   position: relative;
   user-select: none;
 }
@@ -35,13 +35,27 @@
   font-style: italic;
 }
 
+/* HUD: sticky trạng thái trên cùng, luôn thấy trên mobile */
+.blx-hud {
+  position: sticky;
+  top: 0;
+  z-index: 2;
+  display: flex;
+  justify-content: space-around;
+  gap: 10px;
+  padding: 10px;
+  background: rgba(0,0,0,0.25);
+  backdrop-filter: blur(6px);
+  border-bottom: 1px solid rgba(255, 235, 59, 0.25);
+}
+
 /* Main Area */
 .blx-main-area {
   flex: 1;
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 20px;
+  padding: 16px;
   perspective: 1000px;
 }
 
@@ -146,7 +160,7 @@
 .blx-footer {
   display: flex;
   justify-content: space-around;
-  padding: 20px;
+  padding: 16px;
   background: rgba(0,0,0,0.3);
   flex-shrink: 0;
 }
@@ -200,12 +214,15 @@
 .blx-modal-content {
   background: #fff;
   color: #333;
-  width: 90%;
-  max-width: 550px;
+  width: 88%;
+  max-width: 480px;
+  max-height: 80vh;
   border-radius: 12px;
   overflow: hidden;
   box-shadow: 0 10px 25px rgba(0,0,0,0.5);
   animation: blx-popIn 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  display: flex;
+  flex-direction: column;
 }
 
 @keyframes blx-popIn {
@@ -228,9 +245,11 @@
 }
 
 .blx-modal-body {
-  padding: 20px;
+  padding: 14px;
   font-size: 1rem;
   line-height: 1.5;
+  overflow-y: auto;
+  max-height: 60vh;
 }
 
 .blx-rules-container {
@@ -304,7 +323,7 @@
   background: #d32f2f;
   color: #fff;
   border: none;
-  padding: 12px 30px;
+  padding: 12px 26px;
   font-size: 16px;
   font-weight: bold;
   border-radius: 25px;
@@ -366,4 +385,31 @@
   font-size: 1rem;
   line-height: 1.45;
   text-shadow: 0 0 6px rgba(255, 230, 170, 0.25);
+}
+
+/* Mobile-first tweaks */
+@media (max-width: 780px) {
+  .blx-title {
+    font-size: 24px;
+  }
+  .blx-subtitle {
+    font-size: 14px;
+  }
+  .blx-envelopes-grid {
+    gap: 12px;
+    max-width: 92%;
+  }
+  .blx-envelope-wrapper {
+    width: 96px;
+    height: 136px;
+  }
+  .blx-modal-content {
+    width: 92%;
+    max-width: 420px;
+    max-height: 78vh;
+  }
+  .blx-btn {
+    padding: 12px 24px;
+    font-size: 15px;
+  }
 }

@@ -18,7 +18,7 @@
   --dn-radius-md: 14px;
   --dn-radius-sm: 999px;
 
-  color: var(--dn-cream);
+    color: var(--dn-cream);
   display: flex;
   flex-direction: column;
   gap: 10px;
@@ -331,6 +331,17 @@
   overflow: visible;
 }
 
+.dap-nieu__hud {
+  position: sticky;
+  top: 0;
+  z-index: 2;
+  padding: 10px 12px;
+  border-bottom: 1px solid rgba(255, 220, 170, 0.18);
+  background: linear-gradient(180deg, rgba(0,0,0,0.14), rgba(0,0,0,0));
+  display: grid;
+  gap: 8px;
+}
+
 .dap-nieu__arenaHeader {
   padding: 12px 12px 8px;
   border-bottom: 1px solid rgba(255, 220, 170, 0.18);
@@ -353,7 +364,8 @@
   flex: 1;
   min-height: 0;
   position: relative;
-  overflow: hidden;
+  overflow: visible;
+  min-height: 420px;
   border-radius: 0 0 var(--dn-radius-lg) var(--dn-radius-lg);
   background:
     radial-gradient(circle at 50% 10%, rgba(255, 255, 255, 0.1) 0, transparent 55%),
@@ -428,6 +440,7 @@
   transform-origin: 50% -60%;
   filter: drop-shadow(0 18px 26px rgba(0, 0, 0, 0.75));
   will-change: transform;
+  cursor: pointer;
 }
 
 .dap-nieu__potTop {
@@ -637,9 +650,29 @@
   }
   .dap-nieu__panel {
     padding: 10px;
+    max-height: 34vh;
+    overflow: auto;
   }
   .dap-nieu__arenaHeader {
     padding: 10px 10px 8px;
+  }
+  .dap-nieu__arena {
+    min-height: 420px;
+  }
+  .dap-nieu__target {
+    width: min(200px, 50%);
+    height: min(200px, 50%);
+  }
+  .dap-nieu__pot {
+    width: min(220px, 50%);
+    height: min(220px, 50%);
+    cursor: pointer;
+  }
+  .dap-nieu__controls {
+    position: sticky;
+    bottom: 10px;
+    background: linear-gradient(180deg, rgba(0,0,0,0.14), rgba(0,0,0,0));
+    padding-bottom: 6px;
   }
 }
 

@@ -385,6 +385,22 @@
         sub.style.opacity = "0.85";
         sub.textContent = count > 18 ? `+${count - 18} que` : " ";
 
+        if (idx === this.selectedPile && !this.over) {
+          const takeInline = document.createElement("div");
+          takeInline.className = "o-tinh__takeInline";
+          takeInline.innerHTML = `
+            <div class="o-tinh__takeBox" aria-label="Chọn số que muốn rút">
+              <div class="o-tinh__takeLabel">Rút</div>
+              <div class="o-tinh__takeBtns" role="group" aria-label="Số que">
+                <button type="button" class="o-tinh__chip" data-take="1">1</button>
+                <button type="button" class="o-tinh__chip" data-take="2">2</button>
+                <button type="button" class="o-tinh__chip" data-take="3">3</button>
+              </div>
+            </div>
+          `;
+          bottom.appendChild(takeInline);
+        }
+
         bottom.append(tag, sub);
         pileBtn.append(top, sticks, bottom);
         this.boardEl.appendChild(pileBtn);

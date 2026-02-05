@@ -28,6 +28,11 @@
       </ul>
 
       <div class="o-tinh__divider"></div>
+      <div class="o-tinh__controlsFixed">
+        <button type="button" class="o-tinh__btn o-tinh__btn--finish" data-action="complete">
+          Hoàn thành
+        </button>
+      </div>
 
       <div class="o-tinh__status">
         <div class="o-tinh__turnLine">
@@ -45,28 +50,6 @@
           </div>
         </div>
       </div>
-
-      <div class="o-tinh__divider"></div>
-
-      <div class="o-tinh__controls">
-        <div class="o-tinh__takeBox" aria-label="Chọn số que muốn rút">
-          <div class="o-tinh__takeLabel">Rút</div>
-          <div class="o-tinh__takeBtns" role="group" aria-label="Số que">
-            <button type="button" class="o-tinh__chip" data-take="1">1</button>
-            <button type="button" class="o-tinh__chip" data-take="2">2</button>
-            <button type="button" class="o-tinh__chip" data-take="3">3</button>
-          </div>
-        </div>
-
-        <div class="o-tinh__controlBtns">
-          <button type="button" class="o-tinh__btn o-tinh__btn--primary" data-action="restart">
-            Chơi lại
-          </button>
-          <button type="button" class="o-tinh__btn o-tinh__btn--finish" data-action="complete">
-            Hoàn thành
-          </button>
-        </div>
-      </div>
     </aside>
 
     <main class="o-tinh__boardWrap" aria-label="Bàn chơi">
@@ -76,6 +59,9 @@
       </div>
 
       <div class="o-tinh__board" data-role="board"></div>
+
+      <!-- Bottom sheet controls: luôn ở trong khung nhìn mobile -->
+      
 
       <div class="o-tinh__toast" data-role="toast" aria-live="polite" aria-atomic="true"></div>
       <div class="o-tinh__confetti" data-role="confetti" aria-hidden="true"></div>
@@ -87,7 +73,6 @@
       <div class="o-tinh__modalTitle" data-role="modalTitle">Kết thúc</div>
       <div class="o-tinh__modalMsg" data-role="modalMsg"></div>
       <div class="o-tinh__modalBtns">
-        <button type="button" class="o-tinh__btn o-tinh__btn--primary" data-action="restartFromModal">Chơi lại</button>
         <button type="button" class="o-tinh__btn o-tinh__btn--finish" data-action="completeFromModal">Hoàn thành</button>
       </div>
       <div class="o-tinh__modalNote">

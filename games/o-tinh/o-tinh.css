@@ -131,6 +131,13 @@
   gap: 10px;
 }
 
+.o-tinh__controlsFixed {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  padding: 10px 0;
+}
+
 .o-tinh__turnLine {
   display: grid;
   gap: 6px;
@@ -369,6 +376,17 @@
   overflow: auto;
 }
 
+.o-tinh__bottomSheet {
+  position: sticky;
+  bottom: 0;
+  padding: 10px 12px;
+  border-top: 1px solid rgba(255, 220, 170, 0.18);
+  background:
+    linear-gradient(180deg, rgba(0,0,0,0.18), rgba(0,0,0,0.0));
+  display: grid;
+  gap: 10px;
+}
+
 .o-tinh__pile {
   border-radius: 18px;
   border: 1px solid rgba(255, 235, 190, 0.65);
@@ -386,6 +404,28 @@
   min-height: 120px;
   display: grid;
   grid-template-rows: auto 1fr auto;
+}
+
+.o-tinh__takeInline {
+  padding: 10px 12px;
+  border-top: 1px solid rgba(255, 220, 170, 0.18);
+  background: rgba(0, 0, 0, 0.14);
+  display: grid;
+  gap: 8px;
+}
+.o-tinh__takeInline .o-tinh__takeBtns {
+  display: flex;
+  gap: 8px;
+}
+.o-tinh__takeInline .o-tinh__chip {
+  padding: 10px 14px;
+  min-width: 56px;
+  font-size: 1rem;
+}
+.o-tinh__takeInline .o-tinh__controlBtns {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
 }
 
 .o-tinh__pile:hover {
@@ -598,9 +638,18 @@
 @media (max-width: 780px) {
   .o-tinh__layout {
     grid-template-columns: 1fr;
+    grid-auto-rows: auto;
   }
   .o-tinh__board {
     grid-template-columns: 1fr;
+    min-height: 48vh;
+  }
+  .o-tinh__status {
+    position: sticky;
+    top: 0;
+    background: linear-gradient(180deg, rgba(0,0,0,0.12), rgba(0,0,0,0));
+    padding-bottom: 6px;
+    z-index: 2;
   }
   .o-tinh__header {
     flex-direction: column;
@@ -615,6 +664,8 @@
   }
   .o-tinh__panel {
     padding: 10px;
+    max-height: 42vh;
+    overflow: auto;
   }
   .o-tinh__chip {
     padding: 6px 10px;
@@ -626,6 +677,12 @@
   }
   .o-tinh__boardSub {
     font-size: 0.82rem;
+  }
+  .o-tinh__controls {
+    position: sticky;
+    top: 0;
+    padding-top: 6px;
+    background: linear-gradient(180deg, rgba(0,0,0,0.16), rgba(0,0,0,0));
   }
 }
 
