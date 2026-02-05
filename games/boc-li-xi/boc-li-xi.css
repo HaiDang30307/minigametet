@@ -214,9 +214,9 @@
 .blx-modal-content {
   background: #fff;
   color: #333;
-  width: 88%;
-  max-width: 480px;
-  max-height: 80vh;
+  width: 82%;
+  max-width: 360px;
+  max-height: 74vh;
   border-radius: 12px;
   overflow: hidden;
   box-shadow: 0 10px 25px rgba(0,0,0,0.5);
@@ -233,23 +233,24 @@
 .blx-modal-header {
   background: #d32f2f;
   color: #ffeb3b;
-  padding: 15px;
+  padding: 12px;
   text-align: center;
   border-bottom: 2px solid #b71c1c;
 }
 .blx-modal-header h2 {
   margin: 0;
-  font-size: 1.5rem;
+  font-size: 1.25rem;
   text-transform: uppercase;
   text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
 }
 
 .blx-modal-body {
-  padding: 14px;
-  font-size: 1rem;
-  line-height: 1.5;
+  padding: 12px;
+  font-size: 0.95rem;
+  line-height: 1.45;
   overflow-y: auto;
-  max-height: 60vh;
+  flex: 1 1 auto;
+  max-height: 58vh;
 }
 
 .blx-rules-container {
@@ -313,10 +314,16 @@
 }
 
 .blx-modal-footer {
-  padding: 15px;
+  padding: 12px;
   text-align: center;
   background: #fafafa;
   border-top: 1px solid #eee;
+}
+
+/* Buttons inside modal: slightly smaller, balanced */
+.blx-modal-content .blx-btn {
+  padding: 10px 20px;
+  font-size: 14px;
 }
 
 .blx-btn {
@@ -404,12 +411,15 @@
     height: 136px;
   }
   .blx-modal-content {
-    width: 92%;
-    max-width: 420px;
-    max-height: 78vh;
+    width: 90%;
+    max-width: 320px;
+    max-height: 70vh;
   }
-  .blx-btn {
-    padding: 12px 24px;
-    font-size: 15px;
+  .blx-modal-header h2 {
+    font-size: 1.1rem;
+  }
+  .blx-modal-content .blx-btn {
+    padding: 10px 18px;
+    font-size: 13px;
   }
 }
