@@ -19,7 +19,6 @@
   --dn-radius-sm: 999px;
 
   color: var(--dn-cream);
-  height: 100%;
   display: flex;
   flex-direction: column;
   gap: 10px;
@@ -100,7 +99,7 @@
     radial-gradient(circle at 20% 0%, rgba(255, 255, 255, 0.08) 0, transparent 55%),
     linear-gradient(145deg, rgba(55, 0, 7, 0.92), rgba(25, 0, 4, 0.94));
   box-shadow: 0 14px 32px rgba(0, 0, 0, 0.7);
-  overflow: hidden;
+  overflow: visible;
 }
 
 .dap-nieu__panel {
@@ -329,6 +328,7 @@
   display: flex;
   flex-direction: column;
   min-height: 0;
+  overflow: visible;
 }
 
 .dap-nieu__arenaHeader {
@@ -623,6 +623,23 @@
 @media (max-width: 780px) {
   .dap-nieu__layout {
     grid-template-columns: 1fr;
+  }
+  .dap-nieu__header {
+    flex-direction: column;
+    padding: 10px;
+  }
+  .dap-nieu__title {
+    font-size: 1.1rem;
+  }
+  .dap-nieu__subtitle {
+    font-size: 0.88rem;
+    line-height: 1.4;
+  }
+  .dap-nieu__panel {
+    padding: 10px;
+  }
+  .dap-nieu__arenaHeader {
+    padding: 10px 10px 8px;
   }
 }
 
