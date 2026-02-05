@@ -203,6 +203,7 @@
   opacity: 0;
   pointer-events: none;
   transition: opacity 0.3s ease;
+  padding: 10px 10px calc(10px + env(safe-area-inset-bottom)) 10px;
 }
 
 .blx-modal.show {
@@ -216,13 +217,13 @@
   color: #333;
   width: 82%;
   max-width: 360px;
-  max-height: 74vh;
+  max-height: calc(100vh - 32px);
   border-radius: 12px;
   overflow: hidden;
   box-shadow: 0 10px 25px rgba(0,0,0,0.5);
   animation: blx-popIn 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-rows: auto 1fr auto;
 }
 
 @keyframes blx-popIn {
@@ -250,7 +251,7 @@
   line-height: 1.45;
   overflow-y: auto;
   flex: 1 1 auto;
-  max-height: 58vh;
+  max-height: calc(100vh - 140px);
 }
 
 .blx-rules-container {
@@ -318,6 +319,7 @@
   text-align: center;
   background: #fafafa;
   border-top: 1px solid #eee;
+  padding-bottom: calc(12px + env(safe-area-inset-bottom));
 }
 
 /* Buttons inside modal: slightly smaller, balanced */
@@ -413,7 +415,7 @@
   .blx-modal-content {
     width: 90%;
     max-width: 320px;
-    max-height: 70vh;
+    max-height: calc(100vh - 24px);
   }
   .blx-modal-header h2 {
     font-size: 1.1rem;
