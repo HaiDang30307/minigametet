@@ -925,6 +925,7 @@ async function renderOTinhStage() {
 async function renderDapNieuStage() {
   clearStageContainer();
   const view = createStageView("dap-nieu-stage");
+  view.style.overflowY = "auto";
 
   const header = document.createElement("div");
   header.className = "stage-header";
@@ -936,10 +937,10 @@ async function renderDapNieuStage() {
   `;
 
   const holder = document.createElement("div");
-  holder.style.height = "calc(100% - 38px)";
+  holder.style.height = "auto";
   holder.style.marginTop = "8px";
   holder.style.position = "relative";
-  holder.style.overflow = "hidden";
+  holder.style.overflowY = "auto";
   holder.style.borderRadius = "16px";
   holder.style.border = "1px solid rgba(255, 201, 151, 0.55)";
   holder.style.background =
