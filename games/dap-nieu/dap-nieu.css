@@ -1,0 +1,628 @@
+/* ==============================
+   Stage 5: ĐẬP NIÊU (scoped CSS)
+   - All styles scoped under .dap-nieu
+   - Vibe: lễ hội / Tết (đỏ–vàng), có animation
+   ============================== */
+
+.dap-nieu {
+  --dn-red: #a40018;
+  --dn-red2: #d10022;
+  --dn-gold: #ffd36a;
+  --dn-gold2: #ffb000;
+  --dn-cream: #fff2d2;
+  --dn-ink: #240707;
+  --dn-wood1: #b57a3a;
+  --dn-wood2: #6a3a17;
+
+  --dn-radius-lg: 18px;
+  --dn-radius-md: 14px;
+  --dn-radius-sm: 999px;
+
+  color: var(--dn-cream);
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  position: relative;
+}
+
+.dap-nieu * {
+  box-sizing: border-box;
+}
+
+.dap-nieu__header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 12px;
+  border-radius: var(--dn-radius-lg);
+  background:
+    radial-gradient(circle at 20% 0%, rgba(255, 255, 255, 0.12) 0, transparent 55%),
+    linear-gradient(145deg, rgba(160, 0, 24, 0.88), rgba(70, 0, 10, 0.9));
+  border: 1px solid rgba(255, 210, 140, 0.75);
+  box-shadow: 0 14px 30px rgba(0, 0, 0, 0.65);
+}
+
+.dap-nieu__kicker {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2px 10px;
+  border-radius: var(--dn-radius-sm);
+  background: linear-gradient(145deg, rgba(255, 244, 210, 0.25), rgba(255, 170, 0, 0.1));
+  border: 1px solid rgba(255, 220, 170, 0.7);
+  font-size: 0.74rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  width: fit-content;
+}
+
+.dap-nieu__title {
+  margin-top: 6px;
+  font-size: 1.25rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  font-weight: 900;
+  background-image: linear-gradient(120deg, #fff7d7, #ffe39a, #ffd36a);
+  background-clip: text;
+  color: transparent;
+}
+
+.dap-nieu__subtitle {
+  margin-top: 6px;
+  font-size: 0.9rem;
+  opacity: 0.92;
+  max-width: 560px;
+  line-height: 1.35;
+}
+
+.dap-nieu__topActions {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.dap-nieu__layout {
+  flex: 1;
+  min-height: 0;
+  display: grid;
+  grid-template-columns: minmax(240px, 340px) 1fr;
+  gap: 10px;
+}
+
+.dap-nieu__panel,
+.dap-nieu__arenaWrap {
+  border-radius: var(--dn-radius-lg);
+  border: 1px solid rgba(255, 210, 140, 0.7);
+  background:
+    radial-gradient(circle at 20% 0%, rgba(255, 255, 255, 0.08) 0, transparent 55%),
+    linear-gradient(145deg, rgba(55, 0, 7, 0.92), rgba(25, 0, 4, 0.94));
+  box-shadow: 0 14px 32px rgba(0, 0, 0, 0.7);
+  overflow: hidden;
+}
+
+.dap-nieu__panel {
+  padding: 12px;
+}
+
+.dap-nieu__panelTitle {
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-size: 0.86rem;
+}
+
+.dap-nieu__rules {
+  margin-top: 8px;
+  padding-left: 18px;
+  display: grid;
+  gap: 6px;
+  font-size: 0.9rem;
+  opacity: 0.95;
+}
+
+.dap-nieu__divider {
+  height: 1px;
+  background: rgba(255, 220, 170, 0.25);
+  margin: 10px 0;
+}
+
+.dap-nieu__status {
+  display: grid;
+  gap: 8px;
+}
+
+.dap-nieu__badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.dap-nieu__badge {
+  width: fit-content;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 6px 10px;
+  border-radius: var(--dn-radius-sm);
+  border: 1px solid rgba(255, 220, 170, 0.75);
+  font-weight: 900;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  font-size: 0.78rem;
+  background: rgba(255, 215, 0, 0.12);
+}
+
+.dap-nieu__badge--gold {
+  background: rgba(255, 180, 0, 0.16);
+  color: #fff4dc;
+}
+
+.dap-nieu__hint {
+  font-size: 0.9rem;
+  opacity: 0.9;
+  line-height: 1.35;
+}
+
+.dap-nieu__controls {
+  display: grid;
+  gap: 10px;
+}
+
+.dap-nieu__controlBtns {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}
+
+.dap-nieu__btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 10px 14px;
+  border-radius: 999px;
+  border: none;
+  cursor: pointer;
+  font-size: 0.86rem;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  transition: transform 0.14s ease, box-shadow 0.14s ease, filter 0.14s ease;
+  user-select: none;
+  touch-action: manipulation;
+}
+
+.dap-nieu__btn:hover {
+  transform: translateY(-1px) scale(1.01);
+  filter: brightness(1.05);
+}
+
+.dap-nieu__btn:active {
+  transform: translateY(1px) scale(0.99);
+}
+
+.dap-nieu__btn:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+  filter: none;
+}
+
+.dap-nieu__btn--primary {
+  color: var(--dn-ink);
+  background: radial-gradient(circle at 20% 0, #fff7d3 0, #ffd36a 35%, #ffb000 70%, #b36b00 100%);
+  box-shadow: 0 12px 24px rgba(255, 150, 0, 0.5);
+}
+
+.dap-nieu__btn--finish {
+  color: #fff4dc;
+  background: radial-gradient(circle at 20% 0, rgba(255, 255, 255, 0.12) 0, rgba(210, 0, 34, 0.95) 55%, rgba(95, 0, 16, 0.98) 100%);
+  border: 1px solid rgba(255, 220, 170, 0.75);
+  box-shadow: 0 12px 24px rgba(210, 0, 34, 0.35);
+}
+
+.dap-nieu__btn--ghost {
+  color: #fff0d7;
+  background: rgba(0, 0, 0, 0.18);
+  border: 1px solid rgba(255, 220, 170, 0.6);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.55);
+}
+
+.dap-nieu__btn--hit {
+  color: var(--dn-ink);
+  background:
+    radial-gradient(circle at 20% 0, #fff7d3 0, #ffd36a 30%, #ffb000 65%, #b36b00 100%);
+  box-shadow:
+    0 16px 30px rgba(255, 160, 0, 0.55),
+    0 0 18px rgba(255, 210, 120, 0.35);
+  position: relative;
+  overflow: hidden;
+}
+
+.dap-nieu__btn--hit::before {
+  content: "";
+  position: absolute;
+  inset: -40%;
+  background: linear-gradient(120deg, rgba(255, 255, 255, 0.75), transparent 60%);
+  transform: translateX(-120%);
+  animation: dnSweep 2.8s ease-in-out infinite;
+  opacity: 0.35;
+}
+
+@keyframes dnSweep {
+  0% { transform: translateX(-120%); }
+  35% { transform: translateX(110%); }
+  100% { transform: translateX(110%); }
+}
+
+.dap-nieu__icon--music {
+  width: 16px;
+  height: 16px;
+  border-radius: 4px;
+  border: 2px solid rgba(255, 230, 190, 0.95);
+  border-top-color: transparent;
+  position: relative;
+}
+.dap-nieu__icon--music::before,
+.dap-nieu__icon--music::after {
+  content: "";
+  position: absolute;
+}
+.dap-nieu__icon--music::before {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  border: 2px solid rgba(255, 230, 190, 0.95);
+  border-left-color: transparent;
+  border-top-color: transparent;
+  bottom: -8px;
+  right: -2px;
+}
+.dap-nieu__icon--music::after {
+  width: 2px;
+  height: 8px;
+  background: rgba(255, 230, 190, 0.95);
+  bottom: -6px;
+  left: 1px;
+}
+
+.dap-nieu__icon--hammer {
+  width: 18px;
+  height: 18px;
+  border-radius: 4px;
+  background: linear-gradient(145deg, rgba(106, 58, 23, 0.85), rgba(181, 122, 58, 0.75));
+  box-shadow:
+    0 6px 10px rgba(0, 0, 0, 0.35),
+    0 0 0 1px rgba(0, 0, 0, 0.18) inset;
+  position: relative;
+  transform: rotate(-12deg);
+}
+.dap-nieu__icon--hammer::before {
+  content: "";
+  position: absolute;
+  left: 3px;
+  top: 2px;
+  width: 12px;
+  height: 6px;
+  border-radius: 3px;
+  background: linear-gradient(145deg, #fff2d2, #ffd36a);
+  box-shadow: 0 0 10px rgba(255, 210, 120, 0.35);
+}
+.dap-nieu__icon--hammer::after {
+  content: "";
+  position: absolute;
+  left: 8px;
+  top: 6px;
+  width: 3px;
+  height: 11px;
+  border-radius: 2px;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.25), rgba(0, 0, 0, 0) 55%),
+    linear-gradient(90deg, rgba(212, 182, 106, 0.95), rgba(161, 131, 63, 0.95));
+}
+
+.dap-nieu__arenaWrap {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+}
+
+.dap-nieu__arenaHeader {
+  padding: 12px 12px 8px;
+  border-bottom: 1px solid rgba(255, 220, 170, 0.18);
+}
+
+.dap-nieu__arenaTitle {
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-size: 0.9rem;
+}
+
+.dap-nieu__arenaSub {
+  margin-top: 4px;
+  font-size: 0.84rem;
+  opacity: 0.88;
+}
+
+.dap-nieu__arena {
+  flex: 1;
+  min-height: 0;
+  position: relative;
+  overflow: hidden;
+  border-radius: 0 0 var(--dn-radius-lg) var(--dn-radius-lg);
+  background:
+    radial-gradient(circle at 50% 10%, rgba(255, 255, 255, 0.1) 0, transparent 55%),
+    linear-gradient(180deg, rgba(160, 0, 24, 0.12), rgba(0, 0, 0, 0.22)),
+    repeating-linear-gradient(
+      45deg,
+      rgba(255, 211, 106, 0.05) 0,
+      rgba(255, 211, 106, 0.05) 10px,
+      rgba(255, 255, 255, 0.02) 10px,
+      rgba(255, 255, 255, 0.02) 20px
+    );
+}
+
+.dap-nieu__rope {
+  position: absolute;
+  top: 18%;
+  left: 50%;
+  width: 4px;
+  height: 28%;
+  transform: translateX(-50%);
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.25), rgba(0, 0, 0, 0) 60%),
+    linear-gradient(90deg, rgba(212, 182, 106, 0.95), rgba(161, 131, 63, 0.95));
+  border-radius: 999px;
+  opacity: 0.85;
+  filter: drop-shadow(0 10px 16px rgba(0, 0, 0, 0.45));
+}
+
+.dap-nieu__target {
+  position: absolute;
+  top: 42%;
+  left: 50%;
+  width: min(140px, 34%);
+  height: min(140px, 34%);
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+}
+
+.dap-nieu__targetRing {
+  position: absolute;
+  inset: 0;
+  border-radius: 999px;
+  border: 2px dashed rgba(255, 211, 106, 0.85);
+  box-shadow: 0 0 22px rgba(255, 211, 106, 0.4);
+  animation: dnRingSpin 5.2s linear infinite;
+}
+
+.dap-nieu__targetGlow {
+  position: absolute;
+  inset: 10%;
+  border-radius: 999px;
+  background: radial-gradient(circle, rgba(255, 211, 106, 0.18) 0, transparent 60%);
+  animation: dnPulse 1.8s ease-in-out infinite;
+}
+
+@keyframes dnRingSpin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+@keyframes dnPulse {
+  0%, 100% { opacity: 0.55; transform: scale(0.98); }
+  50% { opacity: 0.95; transform: scale(1.03); }
+}
+
+.dap-nieu__pot {
+  position: absolute;
+  top: 42%;
+  left: 50%;
+  width: min(150px, 38%);
+  height: min(150px, 38%);
+  transform: translate(-50%, -50%);
+  transform-origin: 50% -60%;
+  filter: drop-shadow(0 18px 26px rgba(0, 0, 0, 0.75));
+  will-change: transform;
+}
+
+.dap-nieu__potTop {
+  position: absolute;
+  top: 8%;
+  left: 50%;
+  width: 60%;
+  height: 12%;
+  transform: translateX(-50%);
+  border-radius: 999px;
+  background: linear-gradient(145deg, rgba(255, 255, 255, 0.18), rgba(0, 0, 0, 0.06)),
+    linear-gradient(180deg, rgba(181, 122, 58, 0.42), rgba(106, 58, 23, 0.28));
+  border: 1px solid rgba(255, 235, 190, 0.45);
+}
+
+.dap-nieu__potBody {
+  position: absolute;
+  top: 16%;
+  left: 50%;
+  width: 78%;
+  height: 70%;
+  transform: translateX(-50%);
+  border-radius: 18px 18px 26px 26px;
+  background:
+    radial-gradient(circle at 30% 22%, rgba(255, 255, 255, 0.16) 0, transparent 45%),
+    linear-gradient(145deg, rgba(255, 255, 255, 0.08), rgba(0, 0, 0, 0.12)),
+    linear-gradient(180deg, rgba(181, 122, 58, 0.36), rgba(106, 58, 23, 0.22));
+  border: 1px solid rgba(255, 235, 190, 0.6);
+  box-shadow:
+    0 0 0 1px rgba(0, 0, 0, 0.15) inset,
+    0 0 20px rgba(255, 211, 106, 0.08);
+}
+
+.dap-nieu__potShine {
+  position: absolute;
+  inset: 18% 22% 22% 22%;
+  border-radius: 22px;
+  background: linear-gradient(120deg, rgba(255, 255, 255, 0.22), transparent 60%);
+  transform: translateX(-10%);
+  opacity: 0.55;
+  animation: dnShine 2.4s ease-in-out infinite;
+  pointer-events: none;
+}
+
+@keyframes dnShine {
+  0%, 100% { transform: translateX(-14%); opacity: 0.45; }
+  50% { transform: translateX(10%); opacity: 0.7; }
+}
+
+/* Hit FX */
+.dap-nieu__hitFx {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.dap-nieu__spark {
+  position: absolute;
+  left: 50%;
+  top: 42%;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: radial-gradient(circle, #fff2d2 0, #ffd36a 40%, #ffb000 80%);
+  box-shadow: 0 0 16px rgba(255, 211, 106, 0.8);
+  transform: translate(-50%, -50%);
+  animation: dnSpark 500ms ease-out forwards;
+}
+
+@keyframes dnSpark {
+  0% { transform: translate(-50%, -50%) scale(0.6); opacity: 0.9; }
+  40% { transform: translate(-50%, -50%) scale(1.3); opacity: 1; }
+  100% { transform: translate(-50%, -50%) scale(2.2); opacity: 0; }
+}
+
+.dap-nieu__toast {
+  position: absolute;
+  left: 50%;
+  bottom: 10px;
+  transform: translateX(-50%);
+  border-radius: 999px;
+  padding: 10px 14px;
+  border: 1px solid rgba(255, 220, 170, 0.6);
+  background: rgba(0, 0, 0, 0.35);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 14px 28px rgba(0, 0, 0, 0.65);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.18s ease, transform 0.18s ease;
+  max-width: min(520px, 94%);
+  text-align: center;
+  font-size: 0.9rem;
+  line-height: 1.25;
+}
+
+.dap-nieu__toast.is-show {
+  opacity: 1;
+  transform: translateX(-50%) translateY(-2px);
+}
+
+/* Confetti */
+.dap-nieu__confetti {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.dap-nieu__confettiPiece {
+  position: absolute;
+  top: -10%;
+  width: 10px;
+  height: 14px;
+  border-radius: 3px;
+  opacity: 0.95;
+  transform: translateY(-20px) rotate(0deg);
+  animation: dnConfettiFall var(--dn-fall, 1200ms) linear forwards;
+}
+
+@keyframes dnConfettiFall {
+  0% { transform: translate3d(0, -30px, 0) rotate(0deg); opacity: 0.9; }
+  100% { transform: translate3d(var(--dn-dx, 0px), 120vh, 0) rotate(540deg); opacity: 0; }
+}
+
+/* Modal */
+.dap-nieu__modalBackdrop {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  background: rgba(0, 0, 0, 0.55);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s ease;
+  z-index: 5;
+}
+
+.dap-nieu__modalBackdrop.is-open {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.dap-nieu__modal {
+  width: min(520px, 92%);
+  border-radius: 20px;
+  padding: 14px 14px 12px;
+  border: 1px solid rgba(255, 220, 170, 0.75);
+  background:
+    radial-gradient(circle at 20% 0%, rgba(255, 255, 255, 0.12) 0, transparent 55%),
+    linear-gradient(145deg, rgba(160, 0, 24, 0.92), rgba(55, 0, 10, 0.94));
+  box-shadow: 0 18px 46px rgba(0, 0, 0, 0.8);
+  transform: translateY(12px) scale(0.98);
+  transition: transform 0.2s ease;
+}
+
+.dap-nieu__modalBackdrop.is-open .dap-nieu__modal {
+  transform: translateY(0) scale(1);
+}
+
+.dap-nieu__modalTitle {
+  font-weight: 900;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  font-size: 1rem;
+  background-image: linear-gradient(120deg, #fff7d7, #ffe39a, #ffd36a);
+  background-clip: text;
+  color: transparent;
+}
+
+.dap-nieu__modalMsg {
+  margin-top: 8px;
+  font-size: 0.95rem;
+  opacity: 0.95;
+  line-height: 1.35;
+}
+
+.dap-nieu__modalBtns {
+  margin-top: 12px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}
+
+.dap-nieu__modalNote {
+  margin-top: 10px;
+  font-size: 0.82rem;
+  opacity: 0.86;
+  border-top: 1px solid rgba(255, 220, 170, 0.22);
+  padding-top: 10px;
+  line-height: 1.35;
+}
+
+@media (max-width: 780px) {
+  .dap-nieu__layout {
+    grid-template-columns: 1fr;
+  }
+}
+

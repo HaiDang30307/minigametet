@@ -1,0 +1,68 @@
+<div id="boc-li-xi-stage" class="blx-container">
+  <!-- Scoped Styles -->
+  <link rel="stylesheet" href="games/boc-li-xi/boc-li-xi.css">
+
+  <div class="blx-header">
+    <div class="blx-title">BỐC LÌ XÌ MAY MẮN</div>
+    <div class="blx-subtitle">Vòng Thưởng Đặc Biệt</div>
+  </div>
+
+  <div class="blx-main-area">
+    <div class="blx-envelopes-grid" id="blx-grid">
+      <!-- Envelopes injected by JS -->
+    </div>
+  </div>
+
+  <div class="blx-footer">
+    <div class="blx-info-box">
+      <span class="blx-label">Lượt bốc:</span>
+      <span id="blx-turns-count" class="blx-value">--</span>
+    </div>
+    <div class="blx-info-box">
+      <span class="blx-label">Tổng tiền:</span>
+      <span id="blx-total-money" class="blx-value">0đ</span>
+    </div>
+  </div>
+
+  <!-- Rules Modal -->
+  <div id="blx-modal" class="blx-modal">
+    <div class="blx-modal-content">
+      <div class="blx-modal-header">
+        <h2>LUẬT CHƠI</h2>
+      </div>
+      <div class="blx-modal-body">
+        <div class="blx-rules-container">
+          <p class="blx-rule-main">🎉 <strong>Thắng TẤT CẢ 5 stage trước</strong> ➜ Được bốc <span class="blx-h-light">2 lần</span>.</p>
+          <p class="blx-rule-main">⚠️ <strong>Thua BẤT KỲ stage nào</strong> ➜ Chỉ được bốc <span class="blx-h-warn">1 lần</span>.</p>
+          <div class="blx-rule-note">
+            <small>(*) "Thua stage" nghĩa là KHÔNG hoàn thành stage đó.</small><br>
+            <small>(Riêng Stage 1 & 3: Trả lời sai từ <strong>3 câu</strong> trở lên = Thua)</small>
+          </div>
+        </div>
+        
+        <div class="blx-status-container">
+          <div id="blx-status-msg" class="blx-status-msg"></div>
+          <ul id="blx-history-list" class="blx-history-list">
+            <!-- History items injected here -->
+          </ul>
+        </div>
+      </div>
+      <div class="blx-modal-footer">
+        <button id="blx-btn-start" class="blx-btn">BẮT ĐẦU</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Result Overlay -->
+  <div id="blx-result-overlay" class="blx-overlay hidden">
+    <div class="blx-result-card">
+      <div class="blx-result-title">KẾT QUẢ</div>
+      <div class="blx-result-amount" id="blx-final-amount">0đ</div>
+      <div class="blx-result-note">Lộc xuân đầu năm<br/>📸 Bạn hãy chụp màn hình lại và gửi cho tui để nhận thưởng nhé!</div>
+      <button id="blx-btn-finish" class="blx-btn">HOÀN TẤT</button>
+    </div>
+  </div>
+
+  <!-- Logic Script -->
+  <script src="games/boc-li-xi/boc-li-xi.js"></script>
+</div>

@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <title>Lì Xì Tết – Mini Game</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <!-- Background layers -->
+  <div class="bg-gradient"></div>
+  <div class="bg-particles"></div>
+  <div class="bg-decor">
+    <div class="lantern lantern-left"></div>
+    <div class="lantern lantern-right"></div>
+    <div class="blossom b1"></div>
+    <div class="blossom b2"></div>
+    <div class="blossom b3"></div>
+  </div>
+
+  <!-- Main app -->
+  <div id="app">
+    <header class="top-bar">
+      <div class="brand">
+        <div class="brand-coin"></div>
+        <div class="brand-text">
+          <div class="brand-title">Lì Xì Tết</div>
+          <div class="brand-sub">Mini game · Chúc Mừng Năm Mới</div>
+        </div>
+      </div>
+
+      <div class="top-actions">
+        <button id="musicToggle" class="btn-ghost" type="button">
+          <span class="music-icon"></span>
+          <span class="music-label">Nhạc: Tắt</span>
+        </button>
+      </div>
+    </header>
+
+    <!-- Stage indicator -->
+    <nav class="stage-indicator">
+      <div class="stage-pill" data-stage="1">
+        <span class="stage-number">1</span>
+        <span class="stage-label">Câu Hỏi Ngày Tết</span>
+      </div>
+      <div class="stage-pill" data-stage="2">
+        <span class="stage-number">2</span>
+        <span class="stage-label">Lật Thẻ May Mắn</span>
+      </div>
+      <div class="stage-pill" data-stage="3">
+        <span class="stage-number">3</span>
+        <span class="stage-label">Thử Thách Toán Học</span>
+      </div>
+      <div class="stage-pill" data-stage="4">
+        <span class="stage-number">4</span>
+        <span class="stage-label">Ô TÍNH</span>
+      </div>
+      <div class="stage-pill" data-stage="5">
+        <span class="stage-number">5</span>
+        <span class="stage-label">Đập Niêu</span>
+      </div>
+      <div class="stage-pill" data-stage="6">
+        <span class="stage-number">6</span>
+        <span class="stage-label">Bốc Lì Xì</span>
+      </div>
+    </nav>
+
+    <!-- Main content (stages injected by JS) -->
+    <main id="stageContainer"></main>
+
+    <footer class="bottom-bar">
+      <div class="floating-coins"></div>
+      <p>Design by Duong Dinh Hai Dang</p>
+    </footer>
+  </div>
+
+  <!-- Simple fireworks canvas -->
+  <canvas id="fxCanvas"></canvas>
+  <div id="screenFlash"></div>
+
+  <script src="script.js"></script>
+</body>
+</html>
