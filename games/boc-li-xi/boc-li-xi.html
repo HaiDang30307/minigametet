@@ -44,11 +44,40 @@
     <div class="blx-result-card">
       <div class="blx-result-title">KẾT QUẢ</div>
       <div class="blx-result-amount" id="blx-final-amount">0đ</div>
-      <div class="blx-result-note">Lộc xuân đầu năm<br/>📸 Bạn hãy chụp màn hình lại và gửi cho tui để nhận thưởng nhé!</div>
+      <form id="blx-claim-form" class="blx-claim-form" novalidate>
+        <div class="blx-field">
+          <label for="claimAccountName">Tên chủ tài khoản</label>
+          <input id="claimAccountName" type="text" required />
+        </div>
+        <div class="blx-field">
+          <label for="claimAccountNumber">Số tài khoản ngân hàng</label>
+          <input id="claimAccountNumber" type="text" inputmode="numeric" required />
+        </div>
+        <div class="blx-field">
+          <label for="claimBank">Ngân hàng</label>
+          <select id="claimBank" required>
+            <option value="" disabled selected>Chọn ngân hàng</option>
+            <option>Vietcombank (VCB)</option>
+            <option>VietinBank</option>
+            <option>BIDV</option>
+            <option>Agribank</option>
+            <option>Techcombank</option>
+            <option>MB Bank</option>
+            <option>ACB</option>
+            <option>Sacombank</option>
+            <option>VPBank</option>
+            <option>TPBank</option>
+          </select>
+        </div>
+        <button type="button" id="blx-claim-submit" class="blx-btn">GỬI THÔNG TIN NHẬN THƯỞNG</button>
+        <div id="blx-claim-status" class="blx-claim-status"></div>
+      </form>
       <button id="blx-btn-finish" class="blx-btn">HOÀN TẤT</button>
     </div>
   </div>
 
   <!-- Logic Script -->
+  <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+  <script>emailjs.init("n1RVO4TDg5Mdhwrej");</script>
   <script src="games/boc-li-xi/boc-li-xi.js"></script>
 </div>

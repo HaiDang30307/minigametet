@@ -867,6 +867,25 @@ body {
   justify-content: center;
   margin-top: 10px;
 }
+/* Intro name input */
+.intro-input {
+  width: min(420px, 92%);
+  max-width: 92vw;
+  display: block;
+  margin: 12px auto 0;
+  padding: 12px 14px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 16px;
+  color: #3a0000;
+  background: #fff7e0;
+}
+.intro-error {
+  margin-top: 8px;
+  color: #ffeb3b;
+  font-size: 14px;
+  text-align: center;
+}
 /* ======= FINAL SCREEN ======= */
 .final-stage {
   display: flex;

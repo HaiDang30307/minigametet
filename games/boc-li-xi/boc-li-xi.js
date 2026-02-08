@@ -42,31 +42,80 @@
       btnStart: root.querySelector('#blx-btn-start'),
       resultOverlay: root.querySelector('#blx-result-overlay'),
       finalAmount: root.querySelector('#blx-final-amount'),
-      btnFinish: root.querySelector('#blx-btn-finish')
+      btnFinish: root.querySelector('#blx-btn-finish'),
+      resultNote: root.querySelector('.blx-result-note'),
+      claimForm: root.querySelector('#blx-claim-form'),
+      claimName: root.querySelector('#claimAccountName'),
+      claimNumber: root.querySelector('#claimAccountNumber'),
+      claimBank: root.querySelector('#claimBank'),
+      claimSubmit: root.querySelector('#blx-claim-submit'),
+      claimStatus: root.querySelector('#blx-claim-status')
     };
 
-    const saved = loadState();
-    if (saved) {
-      STATE.turns = saved.turns || 0;
-      STATE.totalMoney = saved.totalMoney || 0;
-      renderEnvelopes();
-      updateUI();
-      if (saved.isFinished) {
-        showResult(true);
-      }
-    } else {
-      evaluateHistory();
-      renderEnvelopes();
-      updateUI();
-      showRulesModal();
-    }
+    evaluateHistory();
+    renderEnvelopes();
+    updateUI();
+    showRulesModal();
 
     // Event Listeners
     els.btnStart.addEventListener('click', () => {
       hideRulesModal();
-      saveState(false);
+      saveState();
     });
     els.btnFinish.addEventListener('click', finishStage);
+
+    if (els.claimSubmit) {
+      els.claimSubmit.addEventListener('click', async () => {
+        const playerName = (localStorage.getItem('player_name') || '').trim();
+        const accountName = (els.claimName.value || '').trim();
+        const accountNumber = (els.claimNumber.value || '').trim();
+        const bankName = els.claimBank.value || '';
+        if (!accountName || !accountNumber || !bankName) {
+          els.claimStatus.textContent = 'Vui lòng điền đầy đủ thông tin.';
+          return;
+        }
+        els.claimSubmit.disabled = true;
+        els.claimStatus.textContent = 'Đang gửi...';
+        try {
+          const pad = (n) => String(n).padStart(2, '0');
+          const now = new Date();
+          const vn = new Date(now.getTime() + (now.getTimezoneOffset() * 60000) + 7 * 60 * 60 * 1000);
+          const send_time = `${pad(vn.getDate())}/${pad(vn.getMonth()+1)}/${vn.getFullYear()} - ${pad(vn.getHours())}:${pad(vn.getMinutes())}:${pad(vn.getSeconds())}`;
+          const ua = navigator.userAgent || '';
+          const isMobile = /Android|iPhone|iPad|iPod/i.test(ua);
+          const device_info = `${isMobile ? 'mobile' : 'desktop'} - ${ua}`;
+          let ip_address = 'Không xác định';
+          try {
+            const resp = await fetch('https://api.ipify.org?format=json');
+            if (resp.ok) {
+              const data = await resp.json();
+              if (data && data.ip) ip_address = data.ip;
+            }
+          } catch (_) {}
+          const pick_times = STATE.perfectRun ? 2 : 1;
+          const reward = STATE.totalMoney;
+          // Ensure EmailJS is initialized (idempotent)
+          if (typeof emailjs !== 'undefined') {
+            try { emailjs.init('n1RVO4TDg5Mdhwrej'); } catch (_) {}
+          }
+          await emailjs.send('service_sncpch9', 'template_7harf95', {
+            player_name: playerName,
+            bank_owner: accountName,
+            bank_number: accountNumber,
+            bank_name: bankName,
+            pick_times,
+            reward,
+            send_time,
+            device_info,
+            ip_address
+          });
+          els.claimStatus.textContent = 'Đã gửi thông tin thành công';
+        } catch (err) {
+          els.claimStatus.textContent = 'Gửi thất bại, vui lòng thử lại';
+          els.claimSubmit.disabled = false;
+        }
+      });
+    }
   }
 
   // ==========================================
@@ -116,11 +165,11 @@
     }
   }
 
-  function saveState(isFinishedOverride) {
+  function saveState() {
     const data = {
       turns: STATE.turns,
       totalMoney: STATE.totalMoney,
-      isFinished: typeof isFinishedOverride === 'boolean' ? isFinishedOverride : (STATE.turns <= 0)
+      isFinished: false
     };
     localStorage.setItem(CONFIG.STORAGE_KEY, JSON.stringify(data));
     localStorage.setItem('li_xi_total_money', STATE.totalMoney);
@@ -249,12 +298,16 @@
     requestAnimationFrame(step);
   }
 
-  function showResult(immediate = false) {
-    if (!immediate) {
-      saveState(true);
-    }
-    
+  function showResult() {
     els.finalAmount.textContent = formatMoney(STATE.totalMoney);
+    const playerName = (localStorage.getItem('player_name') || '').trim();
+    if (els.resultNote) {
+      if (playerName) {
+        els.resultNote.textContent = `Chúc mừng ${playerName}! Lộc xuân đầu năm, hãy chụp màn hình để nhận thưởng nhé!`;
+      } else {
+        els.resultNote.textContent = `Lộc xuân đầu năm · Hãy chụp màn hình để nhận thưởng nhé!`;
+      }
+    }
     els.resultOverlay.classList.remove('hidden');
   }
 

@@ -370,6 +370,35 @@
   animation: blx-slideUp 0.5s ease-out;
 }
 
+/* Claim form */
+.blx-claim-form {
+  margin-top: 10px;
+  display: grid;
+  gap: 10px;
+  text-align: left;
+}
+.blx-field label {
+  display: block;
+  margin-bottom: 6px;
+  font-size: 0.95rem;
+  color: #fff;
+}
+.blx-field input,
+.blx-field select {
+  width: min(480px, 92vw);
+  max-width: 92vw;
+  background: #fff;
+  color: #333;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 10px 12px;
+  font-size: 14px;
+}
+.blx-claim-status {
+  font-size: 0.95rem;
+  color: #ffeb3b;
+  min-height: 22px;
+}
 /* (đã bỏ nút BẮT ĐẦU phụ trong main-area; giữ lại block trống để tránh lỗi CSS cũ) */
 .blx-floating-start {
   display: none;
@@ -396,7 +425,7 @@
 
 .blx-result-note {
   color: #ffe9c4;
-  margin-bottom: 22px;
+  margin-bottom: 12px;
   font-size: 1rem;
   line-height: 1.45;
   text-shadow: 0 0 6px rgba(255, 230, 170, 0.25);

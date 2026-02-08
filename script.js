@@ -1140,47 +1140,75 @@ function showIntroOverlay() {
   const card = document.createElement('div');
   card.className = 'intro-card';
   card.innerHTML = `
-    <div class="intro-title">Giới Thiệu Trò Chơi</div>
-    <div class="intro-sub">Bạn sẽ trải qua 5 mini game theo thứ tự, kết quả ảnh hưởng tới vòng thưởng Bốc Lì Xì.</div>
-    <div class="intro-list">
-      <div class="intro-item">
-        <div class="intro-item-title">Màn 1 · Câu Hỏi Ngày Tết</div>
-        <div class="intro-item-desc">Trả lời đúng các câu hỏi về Tết Việt. Sai từ <strong>3 câu</strong> trở lên là thua màn.</div>
-      </div>
-      <div class="intro-item">
-        <div class="intro-item-title">Màn 2 · Lật Thẻ May Mắn</div>
-        <div class="intro-item-desc">Lật và ghép đủ 3 cặp biểu tượng may mắn để qua màn.</div>
-      </div>
-      <div class="intro-item">
-        <div class="intro-item-title">Màn 3 · Thử Thách Toán Học</div>
-        <div class="intro-item-desc">Giải phép tính cơ bản. Sai từ <strong>3 câu</strong> trở lên là thua màn.</div>
-      </div>
-      <div class="intro-item">
-        <div class="intro-item-title">Màn 4 · Ô TÍNH</div>
-        <div class="intro-item-desc">Rút 1–3 que, ai rút que cuối cùng là thua. Cố gắng không thua màn!</div>
-      </div>
-      <div class="intro-item">
-        <div class="intro-item-title">Màn 5 · Đập Niêu</div>
-        <div class="intro-item-desc">Canh thời điểm để đập trúng niêu. Trúng là thắng màn.</div>
+    <div class="intro-step-name">
+      <div class="intro-title">Nhập Tên Người Chơi</div>
+      <div class="intro-sub">Vui lòng nhập tên để bắt đầu trải nghiệm.</div>
+      <input id="playerNameInput" class="intro-input" type="text" placeholder="Nhập tên của bạn" />
+      <div id="introNameError" class="intro-error"></div>
+      <div class="intro-footer">
+        <button type="button" class="btn-primary" id="introNameBtn">Xác nhận</button>
       </div>
     </div>
-    <div class="intro-item">
-      <div class="intro-item-title">Vòng Thưởng · Bốc Lì Xì</div>
-      <div class="intro-item-desc">
-        <p>Thắng đủ <strong>5 màn</strong> → được bốc <strong>2 lần</strong>.</p>
-        <p>Thua <strong>bất kỳ</strong> màn nào → chỉ được bốc <strong>1 lần</strong>.</p>
-        <p>Riêng <strong>Màn 1</strong> và <strong>Màn 3</strong>, nếu trả lời sai từ <strong>3 câu trở lên (≥ 3)</strong> thì tính là <strong>thua màn</strong>.</p>
-        <p>Kết quả thắng/thua sẽ được tổng hợp và <strong>thông báo lại ở Stage 6</strong>.</p>
+    <div class="intro-step-rules" style="display:none;">
+      <div class="intro-title">Giới Thiệu Trò Chơi</div>
+      <div class="intro-sub">Bạn sẽ trải qua 5 mini game theo thứ tự, kết quả ảnh hưởng tới vòng thưởng Bốc Lì Xì.</div>
+      <div class="intro-list">
+        <div class="intro-item">
+          <div class="intro-item-title">Màn 1 · Câu Hỏi Ngày Tết</div>
+          <div class="intro-item-desc">Trả lời đúng các câu hỏi về Tết Việt. Sai từ <strong>3 câu</strong> trở lên là thua màn.</div>
+        </div>
+        <div class="intro-item">
+          <div class="intro-item-title">Màn 2 · Lật Thẻ May Mắn</div>
+          <div class="intro-item-desc">Lật và ghép đủ 3 cặp biểu tượng may mắn để qua màn.</div>
+        </div>
+        <div class="intro-item">
+          <div class="intro-item-title">Màn 3 · Thử Thách Toán Học</div>
+          <div class="intro-item-desc">Giải phép tính cơ bản. Sai từ <strong>3 câu</strong> trở lên là thua màn.</div>
+        </div>
+        <div class="intro-item">
+          <div class="intro-item-title">Màn 4 · Ô TÍNH</div>
+          <div class="intro-item-desc">Rút 1–3 que, ai rút que cuối cùng là thua. Cố gắng không thua màn!</div>
+        </div>
+        <div class="intro-item">
+          <div class="intro-item-title">Màn 5 · Đập Niêu</div>
+          <div class="intro-item-desc">Canh thời điểm để đập trúng niêu. Trúng là thắng màn.</div>
+        </div>
       </div>
-    </div>
-    <div class="intro-footer">
-      <button type="button" class="btn-primary" id="introStartBtn">Tôi đã hiểu · Bắt đầu chơi</button>
+      <div class="intro-item">
+        <div class="intro-item-title">Vòng Thưởng · Bốc Lì Xì</div>
+        <div class="intro-item-desc">
+          <p>Thắng đủ <strong>5 màn</strong> → được bốc <strong>2 lần</strong>.</p>
+          <p>Thua <strong>bất kỳ</strong> màn nào → chỉ được bốc <strong>1 lần</strong>.</p>
+          <p>Riêng <strong>Màn 1</strong> và <strong>Màn 3</strong>, nếu trả lời sai từ <strong>3 câu trở lên (≥ 3)</strong> thì tính là <strong>thua màn</strong>.</p>
+          <p>Kết quả thắng/thua sẽ được tổng hợp và <strong>thông báo lại ở Stage 6</strong>.</p>
+        </div>
+      </div>
+      <div class="intro-footer">
+        <button type="button" class="btn-primary" id="introStartBtn">Tôi đã hiểu · Bắt đầu chơi</button>
+      </div>
     </div>
   `;
   overlay.appendChild(card);
   document.body.appendChild(overlay);
-  const btn = card.querySelector('#introStartBtn');
-  btn.addEventListener('click', () => {
+  const nameInput = card.querySelector('#playerNameInput');
+  const nameError = card.querySelector('#introNameError');
+  const stepName = card.querySelector('.intro-step-name');
+  const stepRules = card.querySelector('.intro-step-rules');
+  const btnName = card.querySelector('#introNameBtn');
+  btnName.addEventListener('click', () => {
+    const name = (nameInput.value || '').trim();
+    if (!name) {
+      nameError.textContent = 'Vui lòng nhập tên trước khi tiếp tục.';
+      nameInput.focus();
+      return;
+    }
+    localStorage.setItem('player_name', name);
+    nameError.textContent = '';
+    stepName.style.display = 'none';
+    stepRules.style.display = '';
+  });
+  const btnStart = card.querySelector('#introStartBtn');
+  btnStart.addEventListener('click', () => {
     if (!bgAudio) {
       bgAudio = new Audio("assets/music.mp3");
       bgAudio.loop = true;
