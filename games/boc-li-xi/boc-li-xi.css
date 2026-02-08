@@ -54,23 +54,26 @@
   flex: 1;
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: flex-start; /* tránh cắt nội dung khi cao hơn vùng nhìn */
   padding: 16px;
   perspective: 1000px;
+  overflow: auto; /* cho phép scroll nội bộ nếu cần */
 }
 
 .blx-envelopes-grid {
-  display: flex;
-  gap: 20px;
-  flex-wrap: wrap;
-  justify-content: center;
-  max-width: 800px;
+  width: 100%;
+  max-width: none;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(clamp(88px, 22vw, 140px), 1fr));
+  gap: 16px;
+  justify-items: center;
+  align-items: start;
 }
 
 /* Envelope Card */
 .blx-envelope-wrapper {
-  width: 100px;
-  height: 140px;
+  width: clamp(88px, 22vw, 140px);
+  aspect-ratio: 5 / 7;
   position: relative;
   cursor: pointer;
   transition: transform 0.3s ease;
@@ -102,7 +105,7 @@
 
 .blx-envelope::before {
   content: "🧧";
-  font-size: 40px;
+  font-size: clamp(26px, 6vw, 40px);
   z-index: 2;
 }
 
@@ -189,14 +192,11 @@
 
 /* Modal */
 .blx-modal {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
+  position: fixed;
+  inset: 0;
   background: rgba(0,0,0,0.85);
   backdrop-filter: blur(5px);
-  z-index: 100;
+  z-index: 300;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -210,6 +210,7 @@
   opacity: 1;
   pointer-events: auto;
 }
+/* Modal không ẩn overlay nút BẮT ĐẦU; để nút hiển thị ở giữa, modal dạt lên trên */
 
 /* Modal Content */
 .blx-modal-content {
@@ -217,13 +218,15 @@
   color: #333;
   width: 82%;
   max-width: 360px;
-  max-height: calc(100vh - 32px);
-  border-radius: 12px;
+  max-height: 92vh;
+  border-radius: 8px;
   overflow: hidden;
-  box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.45);
   animation: blx-popIn 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
   display: grid;
   grid-template-rows: auto 1fr auto;
+  align-self: flex-start;
+  margin-top: 8vh;
 }
 
 @keyframes blx-popIn {
@@ -238,11 +241,8 @@
   text-align: center;
   border-bottom: 2px solid #b71c1c;
 }
-.blx-modal-header h2 {
-  margin: 0;
-  font-size: 1.25rem;
-  text-transform: uppercase;
-  text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+.blx-modal-header .blx-btn {
+  margin: 0 auto;
 }
 
 .blx-modal-body {
@@ -251,7 +251,9 @@
   line-height: 1.45;
   overflow-y: auto;
   flex: 1 1 auto;
-  max-height: calc(100vh - 140px);
+  max-height: min(80vh, 560px);
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior: contain;
 }
 
 .blx-rules-container {
@@ -288,13 +290,12 @@
 }
 
 .blx-status-container {
-  margin-top: 15px;
-  border-top: 2px solid #eee;
-  padding-top: 15px;
+  margin-top: 10px;
 }
 .blx-status-msg {
-  margin-bottom: 10px;
-  font-size: 1.1rem;
+  margin-bottom: 0;
+  font-size: 1rem;
+  text-align: center;
 }
 
 .blx-history-list {
@@ -346,7 +347,7 @@
 
 /* Result Overlay */
 .blx-overlay {
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
   width: 100%;
@@ -367,6 +368,11 @@
 .blx-result-card {
   text-align: center;
   animation: blx-slideUp 0.5s ease-out;
+}
+
+/* (đã bỏ nút BẮT ĐẦU phụ trong main-area; giữ lại block trống để tránh lỗi CSS cũ) */
+.blx-floating-start {
+  display: none;
 }
 
 @keyframes blx-slideUp {
@@ -406,16 +412,17 @@
   }
   .blx-envelopes-grid {
     gap: 12px;
-    max-width: 92%;
+    width: 100%;
   }
   .blx-envelope-wrapper {
-    width: 96px;
-    height: 136px;
+    width: clamp(84px, 26vw, 120px);
+    aspect-ratio: 5 / 7;
   }
   .blx-modal-content {
     width: 90%;
     max-width: 320px;
-    max-height: calc(100vh - 24px);
+    max-height: 92vh;
+    border-radius: 8px;
   }
   .blx-modal-header h2 {
     font-size: 1.1rem;

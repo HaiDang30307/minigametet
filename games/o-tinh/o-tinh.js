@@ -220,6 +220,7 @@
       this.selectedTake = 1;
       this.locked = false;
       this.over = false;
+      this.lastActionPile = -1;
       this._toastTimer = 0;
 
       // bind handlers
@@ -353,7 +354,9 @@
         pileBtn.className = "o-tinh__pile";
         pileBtn.setAttribute("data-pile", String(idx));
         pileBtn.setAttribute("aria-disabled", count <= 0 ? "true" : "false");
-        pileBtn.disabled = this.over || this.locked || count <= 0;
+        // Khi ván đã kết thúc (over=true), vẫn cho tương tác tại ô vừa thao tác
+        const disablePile = this.locked || count <= 0 || (this.over && idx !== this.selectedPile);
+        pileBtn.disabled = disablePile;
         pileBtn.classList.toggle("is-selected", idx === this.selectedPile);
 
         const top = document.createElement("div");
@@ -406,6 +409,34 @@
         this.boardEl.appendChild(pileBtn);
       });
 
+      // Hiển thị popup Hoàn thành neo theo ô vừa thao tác khi ván đã kết thúc
+      const existing = this.boardEl.querySelector(".o-tinh__finishPopup");
+      if (existing) existing.remove();
+      if (this.over && this.selectedPile >= 0) {
+        const anchor = this.boardEl.querySelector(`.o-tinh__pile[data-pile="${this.selectedPile}"]`);
+        if (anchor) {
+          const finishPopup = document.createElement("div");
+          finishPopup.className = "o-tinh__finishPopup";
+          finishPopup.style.visibility = "hidden";
+          finishPopup.innerHTML = `
+            <div class="o-tinh__finishMsg">Bạn đã hoàn thành màn này</div>
+            <button type="button" class="o-tinh__btn o-tinh__btn--finish" data-action="complete">Hoàn thành</button>
+          `;
+          this.boardEl.appendChild(finishPopup);
+          const boardRect = this.boardEl.getBoundingClientRect();
+          const rect = anchor.getBoundingClientRect();
+          const popupRect = finishPopup.getBoundingClientRect();
+          let left = rect.left - boardRect.left + 8;
+          let top = rect.bottom - boardRect.top - popupRect.height - 8;
+          left = Math.max(6, Math.min(left, boardRect.width - popupRect.width - 6));
+          top = Math.max(6, Math.min(top, boardRect.height - popupRect.height - 6));
+          finishPopup.style.left = `${left}px`;
+          finishPopup.style.top = `${top}px`;
+          finishPopup.style.bottom = "auto";
+          finishPopup.style.visibility = "visible";
+        }
+      }
+
       this.updateStats();
       this.updateTakeDisabled();
     }
@@ -415,7 +446,7 @@
     endGame(lastTaker) {
       this.over = true;
       this.locked = false;
-      this.selectedPile = -1;
+      this.selectedPile = this.lastActionPile >= 0 ? this.lastActionPile : -1;
       this.render();
       this.syncTurnUI();
 
@@ -433,7 +464,8 @@
 
       if (this.modalTitleEl) this.modalTitleEl.textContent = title;
       if (this.modalMsgEl) this.modalMsgEl.textContent = msg;
-      this.setModalOpen(true);
+      // Không mở modal; dùng popup neo theo ô. Hiển thị thông tin nhẹ bằng toast.
+      this.setToast(title + " · " + msg, 1400);
 
       if (playerWon) {
         this.audio.sfxWin();
@@ -582,6 +614,7 @@
       if (this.piles[pileIdx] <= 0) return;
       if (take > this.piles[pileIdx]) take = this.piles[pileIdx];
 
+      this.lastActionPile = pileIdx;
       this.animateTake(pileIdx, take);
       this.piles[pileIdx] -= take;
       this.audio.sfxTake();
@@ -669,6 +702,9 @@
     requestComplete() {
       // Notify host SPA
       this.root.dispatchEvent(
+        new CustomEvent("oTinh:complete", { bubbles: true })
+      );
+      window.dispatchEvent(
         new CustomEvent("oTinh:complete", { bubbles: true })
       );
     }

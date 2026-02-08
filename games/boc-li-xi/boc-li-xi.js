@@ -156,19 +156,18 @@
   }
 
   function showRulesModal() {
-    els.modalHistoryList.innerHTML = '';
-    
     if (STATE.perfectRun) {
-      els.statusMsg.innerHTML = `<span style="color:#2e7d32; font-weight:bold;">Bạn đã thắng tất cả các stage trước nên được bốc 2 lần!</span>`;
-      // Clear list
+      els.statusMsg.textContent = "Bạn thắng tất cả các màn nên được bốc 2 lần.";
     } else {
-      els.statusMsg.innerHTML = `<span style="color:#d32f2f; font-weight:bold;">Do bạn đã thua ở các stage dưới đây nên chỉ được bốc 1 lần:</span>`;
-      
-      STATE.history.forEach(item => {
-        const li = document.createElement('li');
-        li.textContent = item;
-        els.modalHistoryList.appendChild(li);
-      });
+      const lost = STATE.history.map(h => {
+        if (h.startsWith("Câu Hỏi")) return "Màn 1";
+        if (h.startsWith("Lật Thẻ")) return "Màn 2";
+        if (h.startsWith("Thử Thách")) return "Màn 3";
+        if (h.startsWith("Ô TÍNH")) return "Màn 4";
+        if (h.startsWith("Đập Niêu")) return "Màn 5";
+        return h;
+      }).join(", ");
+      els.statusMsg.textContent = `Bạn đã thua ở ${lost} nên được bốc 1 lần.`;
     }
 
     els.modal.classList.add('show');

@@ -997,7 +997,7 @@ async function renderBocLiXiStage() {
   holder.style.height = "calc(100% - 38px)";
   holder.style.marginTop = "8px";
   holder.style.position = "relative";
-  holder.style.overflow = "hidden";
+  holder.style.overflow = "auto";
   holder.style.borderRadius = "16px";
   holder.style.border = "1px solid rgba(255, 201, 151, 0.55)";
   holder.style.background =
@@ -1166,7 +1166,12 @@ function showIntroOverlay() {
     </div>
     <div class="intro-item">
       <div class="intro-item-title">Vòng Thưởng · Bốc Lì Xì</div>
-      <div class="intro-item-desc">Nếu <strong>thắng tất cả 5 màn</strong> trước đó → được bốc <strong>2 lần</strong>. Nếu <strong>thua bất kỳ màn nào</strong> → chỉ được bốc <strong>1 lần</strong>. Tiền nhận được hiển thị rõ trong kết quả cuối.</div>
+      <div class="intro-item-desc">
+        <p>Thắng đủ <strong>5 màn</strong> → được bốc <strong>2 lần</strong>.</p>
+        <p>Thua <strong>bất kỳ</strong> màn nào → chỉ được bốc <strong>1 lần</strong>.</p>
+        <p>Riêng <strong>Màn 1</strong> và <strong>Màn 3</strong>, nếu trả lời sai từ <strong>3 câu trở lên (≥ 3)</strong> thì tính là <strong>thua màn</strong>.</p>
+        <p>Kết quả thắng/thua sẽ được tổng hợp và <strong>thông báo lại ở Stage 6</strong>.</p>
+      </div>
     </div>
     <div class="intro-footer">
       <button type="button" class="btn-primary" id="introStartBtn">Tôi đã hiểu · Bắt đầu chơi</button>

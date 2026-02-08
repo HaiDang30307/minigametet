@@ -285,16 +285,19 @@ body {
 
 /* Bottom bar */
 .bottom-bar {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 6px;
+  position: relative;
+  display: block;
   font-size: 0.78rem;
   opacity: 0.9;
+  width: 100%;
+  text-align: center;
 }
 
 .floating-coins {
-  position: relative;
+  position: absolute;
+  left: 8px;
+  top: 50%;
+  transform: translateY(-50%);
   width: 50px;
   height: 18px;
 }
