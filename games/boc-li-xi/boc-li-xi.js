@@ -12,12 +12,19 @@
     STORAGE_KEY: 'blx_state'
   };
 
+  const LOCK_KEY = 'stage_6_locked';
+  const EMAIL_LOCK_KEY = 'stage_6_email_sent';
+  const STAGE6_STATE_KEY = 'stage_6_state';
+
   const STATE = {
     turns: 0,
     totalMoney: 0,
     history: [],
     perfectRun: false,
-    isAnimating: false
+    isAnimating: false,
+    locked: false,
+    emailSending: false,
+    pickTimes: 0
   };
 
   // DOM Elements
@@ -52,13 +59,27 @@
       claimStatus: root.querySelector('#blx-claim-status')
     };
 
-    evaluateHistory();
-    renderEnvelopes();
-    updateUI();
-    showRulesModal();
+    STATE.locked = localStorage.getItem(LOCK_KEY) === '1';
+    const saved6Raw = localStorage.getItem(STAGE6_STATE_KEY);
+    const saved6 = saved6Raw ? JSON.parse(saved6Raw) : null;
+    if (saved6 && saved6.isCompleted) {
+      STATE.locked = true;
+      STATE.totalMoney = saved6.totalMoney || 0;
+      STATE.pickTimes = saved6.pickTimes || 0;
+      STATE.turns = 0;
+      renderEnvelopes();
+      updateUI();
+      showResult();
+    } else {
+      evaluateHistory();
+      renderEnvelopes();
+      updateUI();
+      showRulesModal();
+    }
 
     // Event Listeners
     els.btnStart.addEventListener('click', () => {
+      if (STATE.locked) return;
       hideRulesModal();
       saveState();
     });
@@ -66,6 +87,11 @@
 
     if (els.claimSubmit) {
       els.claimSubmit.addEventListener('click', async () => {
+        if (STATE.emailSending) return;
+        if (localStorage.getItem(EMAIL_LOCK_KEY) === '1') {
+          els.claimStatus.textContent = 'Đã gửi thông tin thành công';
+          return;
+        }
         const playerName = (localStorage.getItem('player_name') || '').trim();
         const accountName = (els.claimName.value || '').trim();
         const accountNumber = (els.claimNumber.value || '').trim();
@@ -76,6 +102,7 @@
         }
         els.claimSubmit.disabled = true;
         els.claimStatus.textContent = 'Đang gửi...';
+        STATE.emailSending = true;
         try {
           const pad = (n) => String(n).padStart(2, '0');
           const now = new Date();
@@ -110,10 +137,14 @@
             ip_address
           });
           els.claimStatus.textContent = 'Đã gửi thông tin thành công';
+          localStorage.setItem(EMAIL_LOCK_KEY, '1');
         } catch (err) {
           els.claimStatus.textContent = 'Gửi thất bại, vui lòng thử lại';
           els.claimSubmit.disabled = false;
+          STATE.emailSending = false;
+          return;
         }
+        STATE.emailSending = false;
       });
     }
   }
@@ -158,9 +189,11 @@
     // Determine Turns
     if (failures === 0) {
       STATE.perfectRun = true;
+      STATE.pickTimes = 2;
       STATE.turns = 2;
     } else {
       STATE.perfectRun = false;
+      STATE.pickTimes = 1;
       STATE.turns = 1;
     }
   }
@@ -227,7 +260,7 @@
   }
 
   function updateUI() {
-    els.turnsCount.textContent = STATE.turns;
+    els.turnsCount.textContent = STATE.locked ? STATE.pickTimes : STATE.turns;
     els.totalMoneyDisplay.textContent = formatMoney(STATE.totalMoney);
   }
 
@@ -235,7 +268,7 @@
   // GAMEPLAY
   // ==========================================
   function handleEnvelopeClick(wrapper) {
-    if (STATE.isAnimating || STATE.turns <= 0 || wrapper.classList.contains('open')) {
+    if (STATE.locked || STATE.isAnimating || STATE.turns <= 0 || wrapper.classList.contains('open')) {
       return;
     }
 
@@ -254,12 +287,23 @@
     // Run Animation
     runNumberAnimation(valueDisplay, realValue, () => {
       STATE.totalMoney += realValue;
+      STATE.picksUsed = (STATE.picksUsed || 0) + 1;
       updateUI();
       STATE.isAnimating = false;
       saveState();
+      try {
+        const s6 = {
+          totalMoney: STATE.totalMoney,
+          pickTimes: STATE.pickTimes || (STATE.perfectRun ? 2 : 1),
+          picksUsed: STATE.picksUsed,
+          isCompleted: STATE.turns <= 0
+        };
+        localStorage.setItem(STAGE6_STATE_KEY, JSON.stringify(s6));
+      } catch (_) {}
 
       // Check End Game
       if (STATE.turns <= 0) {
+        localStorage.setItem(LOCK_KEY, '1');
         setTimeout(showResult, 1000);
       }
     });
@@ -309,6 +353,23 @@
       }
     }
     els.resultOverlay.classList.remove('hidden');
+    localStorage.setItem(LOCK_KEY, '1');
+    try {
+      const s6 = {
+        totalMoney: STATE.totalMoney,
+        pickTimes: STATE.pickTimes || (STATE.perfectRun ? 2 : 1),
+        isCompleted: true
+      };
+      localStorage.setItem(STAGE6_STATE_KEY, JSON.stringify(s6));
+    } catch (_) {}
+    try {
+      const raw = localStorage.getItem(CONFIG.STORAGE_KEY);
+      const data = raw ? JSON.parse(raw) : {};
+      data.turns = STATE.turns;
+      data.totalMoney = STATE.totalMoney;
+      data.isFinished = true;
+      localStorage.setItem(CONFIG.STORAGE_KEY, JSON.stringify(data));
+    } catch (_) {}
   }
 
   function finishStage() {
